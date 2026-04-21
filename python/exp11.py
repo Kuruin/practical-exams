@@ -1,10 +1,41 @@
-def plan(start, goal):
-    while start != goal:
-        if start < goal:
-            start += 1
-            print("Move Forward to", start)
-        else:
-            start -= 1
-            print("Move Backward to", start)
+% Facts
 
-plan(2, 5)
+flower(rose).
+thorny(rose).
+color(rose, red).
+
+flower(sunflower).
+color(sunflower, yellow).
+
+flower(lotus).
+habitat(lotus, water).
+
+fruit(mango).
+leaf(mango, green).
+
+thorny(cactus).
+habitat(cactus, desert).
+
+
+% Rules
+
+plant(X) :-
+    flower(X),
+    thorny(X),
+    color(X, red).
+
+plant(X) :-
+    flower(X),
+    color(X, yellow).
+
+plant(X) :-
+    flower(X),
+    habitat(X, water).
+
+plant(X) :-
+    fruit(X),
+    leaf(X, green).
+
+plant(X) :-
+    thorny(X),
+    habitat(X, desert).
