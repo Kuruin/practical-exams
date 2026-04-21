@@ -1,9 +1,10 @@
-# Simple probability example
+# Input probabilities
+prob_rain = float(input("Enter P(Rain): "))
+prob_traffic_given_rain = float(input("Enter P(Traffic | Rain): "))
+prob_traffic = float(input("Enter P(Traffic): "))
 
-P_rain = 0.2
-P_wet_given_rain = 0.9
-P_wet_given_no_rain = 0.1
+# Bayes theorem
+prob_rain_given_traffic = (prob_traffic_given_rain * prob_rain) / prob_traffic
 
-P_wet = (P_rain * P_wet_given_rain) + ((1-P_rain) * P_wet_given_no_rain)
-
-print("Probability of wet grass:", P_wet)
+# Output
+print("P(Rain | Traffic) =", prob_rain_given_traffic)
