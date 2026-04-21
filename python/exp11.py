@@ -1,10 +1,10 @@
-def is_human(name):
-    return True
+def plan(start, goal):
+    while start != goal:
+        if start < goal:
+            start += 1
+            print("Move Forward to", start)
+        else:
+            start -= 1
+            print("Move Backward to", start)
 
-
-def is_mortal(name):
-    if is_human(name):
-        return True
-
-
-print(is_mortal("Socrates"))
+plan(2, 5)
