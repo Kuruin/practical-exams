@@ -1,25 +1,67 @@
-#include <stdio.h> #include <ctype.h> #include <string.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
 
 int main() {
-char s[100], b[20]; printf("Enter code: "); fgets(s, 100, stdin);
+    char s[100];
+    int i = 0;
 
-for (int i = 0, n; s[i]; i += n) { n = 1; // Default jump
-if (isspace(s[i])) continue;
+    printf("Enter code: ");
+    fgets(s, sizeof(s), stdin);
 
-if (sscanf(s + i, "%[a-zA-Z]%n", b, &n)) {
-char *k[] = {"int", "float", "if", "else", "while", "return", NULL}; char *type = "Identifier";
- 
-for (int j = 0; k[j]; j++)
-if (strcmp(b, k[j]) == 0) type = "Keyword";
+    while (s[i] != '\0') {
 
-printf("%s : %s\n", b, type);
-}
+        // Skip spaces
+        if (isspace(s[i])) {
+            i++;
+            continue;
+        }
 
-else if (sscanf(s + i, "%[0-9]%n", b, &n)) { printf("%s : Number\n", b);
-}
-else if (strchr("+-*/=", s[i])) {
-printf("%c : Operator\n", s[i]);
-}
-}
-return 0;
+        // Identifier / Keyword
+        if (isalpha(s[i])) {
+            char word[20];
+            int j = 0;
+
+            while (isalpha(s[i])) {
+                word[j++] = s[i++];
+            }
+            word[j] = '\0';
+
+            if (strcmp(word, "int") == 0 ||
+                strcmp(word, "float") == 0 ||
+                strcmp(word, "if") == 0 ||
+                strcmp(word, "else") == 0 ||
+                strcmp(word, "while") == 0 ||
+                strcmp(word, "return") == 0) {
+                printf("%s : Keyword\n", word);
+            } else {
+                printf("%s : Identifier\n", word);
+            }
+        }
+
+        // Number
+        else if (isdigit(s[i])) {
+            char num[20];
+            int j = 0;
+
+            while (isdigit(s[i])) {
+                num[j++] = s[i++];
+            }
+            num[j] = '\0';
+
+            printf("%s : Number\n", num);
+        }
+
+        // Operator
+        else if (strchr("+-*/=", s[i])) {
+            printf("%c : Operator\n", s[i]);
+            i++;
+        }
+
+        else {
+            i++;
+        }
+    }
+
+    return 0;
 }
