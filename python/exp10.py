@@ -1,24 +1,23 @@
-values = [3, 5, 2, 9]
+import random
 
+print("Rock Paper Scissors")
+print("1=Rock  2=Paper  3=Scissors")
 
-def minimax():
-    left = min(values[0], values[1])
-    right = min(values[2], values[3])
-    return max(left, right)
+user = int(input("Enter choice: "))
+computer = random.randint(1, 3)
 
+names = ["", "Rock", "Paper", "Scissors"]
 
-print(minimax())
+print("User:", names[user])
+print("Computer:", names[computer])
 
+if user == computer:
+    print("Draw")
 
-# or
-def minimax(depth, isMax):
-    if depth == 0:
-        return 1
+elif (user == 1 and computer == 3) or \
+     (user == 2 and computer == 1) or \
+     (user == 3 and computer == 2):
+    print("User Wins")
 
-    if isMax:
-        return max(minimax(depth-1, False), minimax(depth-1, False))
-    else:
-        return min(minimax(depth-1, True), minimax(depth-1, True))
-
-
-print(minimax(3, True))
+else:
+    print("Computer Wins")
